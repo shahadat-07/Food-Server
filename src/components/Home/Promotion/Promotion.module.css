@@ -1,0 +1,7 @@
+ .promotion{
+     background-image: url('../../../assets/images/promotion.webp');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 404px;
+ }
