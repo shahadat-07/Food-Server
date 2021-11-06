@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import LoginImage from "../../assets/images/login.webp";
 import Header from "../Shared Components/Header/Header";
+import Footer from "./../Shared Components/Footer/Footer";
 import classes from "./Login.module.css";
 
 const Login = () => {
@@ -10,7 +11,7 @@ const Login = () => {
       <Header />
       <div className="container">
         <div className="text-center">
-          <h1 className="h3 font-weight-normal mt-5">Welcome!</h1>
+          <h2 className="font-weight-normal mt-5">Welcome!</h2>
           <p className="text-secondary mb-5">Sign up or log in to continue</p>
         </div>
         {/* <img
@@ -69,7 +70,7 @@ const Login = () => {
                 </Link>
               </div>
               <div className="d-flex mt-3">
-                <span>An Admin?</span>
+                <span>A Manager?</span>
                 <Link to="/admin" className={classes.register}>
                   Go On
                 </Link>
@@ -78,6 +79,7 @@ const Login = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </section>
   );
 };

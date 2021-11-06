@@ -1,0 +1,21 @@
+#c1 {
+  background-image: url("../../../assets/images/promotion.webp");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 404px;
+}
+#c2 {
+  background-image: url("../../../assets/images/promotion2.jpeg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 404px;
+}
+#c3 {
+  background-image: url("../../../assets/images/promotion3.jpeg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 404px;
+}

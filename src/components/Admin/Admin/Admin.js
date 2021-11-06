@@ -1,14 +1,8 @@
 import React from "react";
-import AdminHeader from "../AdminHeader/Header";
-import NewRestaurant from "../NewRestaurant/NewRestaurant";
+import NewRestaurant from "./../NewRestaurant/NewRestaurant";
 
 const Admin = () => {
-  return (
-    <div className="container">
-      <AdminHeader />
-      <NewRestaurant />
-    </div>
-  );
+  return <NewRestaurant />;
 };
 
 export default Admin;
