@@ -25,20 +25,6 @@ const Home = () => {
             <Restaurants />
           </div>
         </div>
-        <div className="row">
-          <div className="col-md-3">
-            <Restaurants />
-          </div>
-          <div className="col-md-3">
-            <Restaurants />
-          </div>
-          <div className="col-md-3">
-            <Restaurants />
-          </div>
-          <div className="col-md-3">
-            <Restaurants />
-          </div>
-        </div>
       </div>
       <Footer />
     </section>

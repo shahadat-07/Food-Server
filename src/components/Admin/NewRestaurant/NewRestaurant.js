@@ -3,9 +3,48 @@ import Sidebar from "../Sidebar/Sidebar";
 import Header from "./../../Shared Components/Header/Header";
 
 const NewMenu = () => {
+  // const form = document.getElementById("newRestaurant");
+  // form.addEventListener("submit", newRestaurant);
+
+  async function newRestaurant(event) {
+    event.preventDefault();
+    const restaurantName = document.getElementById("restaurantName").value;
+    const restaurantAddress =
+      document.getElementById("restaurantAddress").value;
+    const operatingHours = document.getElementById("operatingHours").value;
+    const priceLevel = document.getElementById("priceLevel").value;
+    const restaurantType = document.getElementById("restaurantType").value;
+
+    // console.log(
+    //   restaurantName,
+    //   restaurantAddress,
+    //   operatingHours,
+    //   priceLevel,
+    //   restaurantType
+    // );
+
+    const result = await fetch("http://localhost:3030/addRestaurant", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        restaurantName,
+        restaurantAddress,
+        operatingHours,
+        priceLevel,
+        restaurantType,
+      }),
+    }).then((res) => res.json());
+    if (result.status === "Successfull") {
+      alert("New Restaurant Added Successfully");
+      window.location.href = "/";
+    }
+  }
+
   return (
     <>
-      <div class="container-fluid">
+      <div className="container-fluid">
         <Header />
         <div className="row mt-5">
           <div className="col-md-3">
@@ -14,50 +53,69 @@ const NewMenu = () => {
           <div className="col-md-6 mx-5">
             <h1 className="text-center mb-5">Add New Restaurant</h1>
             <form
-              id="add_new"
-              method="post"
-              action="/add"
-              enctype="multipart/form-data"
+              // id="newRestaurant"
+              onSubmit={newRestaurant}
+              // enctype="multipart/form-data"
             >
-              <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">
+              <div className="mb-3">
+                <label for="exampleInputEmail1" className="form-label">
                   Restaurant Name
                 </label>
-                <input type="text" name="name" class="form-control" id="" />
+                <input
+                  type="text"
+                  name="restaurantName"
+                  id="restaurantName"
+                  className="form-control"
+                />
               </div>
-              <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">
+              <div className="mb-3">
+                <label for="exampleInputEmail1" className="form-label">
                   Restaurant Address
                 </label>
-                <input type="text" name="address" class="form-control" id="" />
+                <input
+                  type="text"
+                  name="restaurantAddress"
+                  className="form-control"
+                  id="restaurantAddress"
+                />
               </div>
-              <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">
+              <div className="mb-3">
+                <label for="exampleInputEmail1" className="form-label">
                   Operating Hours
                 </label>
                 <input
                   type="number"
-                  name="costPerNight"
-                  class="form-control"
-                  id=""
+                  name="operatingHours"
+                  className="form-control"
+                  id="operatingHours"
                 />
               </div>
-              <div class="mb-3">
-                <label for="formFile" class="form-label">
+              <div className="mb-3">
+                <label for="formFile" className="form-label">
                   Price Level
                 </label>
-                <select class="form-select" aria-label="Default select example">
+                <select
+                  className="form-select"
+                  name="priceLevel"
+                  id="priceLevel"
+                  aria-label="Default select example"
+                >
                   <option selected>€</option>
                   <option>€€</option>
                   <option>€€€</option>
                   <option>€€€€</option>
                 </select>
               </div>
-              <div class="mb-3">
-                <label for="formFile" class="form-label">
+              <div className="mb-3">
+                <label for="formFile" className="form-label">
                   Restaurant Type
                 </label>
-                <select class="form-select" aria-label="Default select example">
+                <select
+                  className="form-select"
+                  name="restaurantType"
+                  id="restaurantType"
+                  aria-label="Default select example"
+                >
                   <option selected>Buffet</option>
                   <option>Fast Food</option>
                   <option>Fast Casual</option>
@@ -65,13 +123,13 @@ const NewMenu = () => {
                   <option>Fine Dining</option>
                 </select>
               </div>
-              <div class="mb-3">
-                <label for="formFile" class="form-label">
+              {/* <div className="mb-3">
+                <label for="formFile" className="form-label">
                   Restaurant Scenario
                 </label>
-                <input class="form-control" type="file" name="image" />
-              </div>
-              <button type="submit" class="btn btn-outline-dark">
+                <input className="form-control" type="file" name="image" />
+              </div> */}
+              <button type="submit" className="btn btn-outline-dark">
                 {" "}
                 Store in Database and Display
               </button>
