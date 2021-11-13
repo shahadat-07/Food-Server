@@ -1,19 +1,42 @@
 import React from "react";
-import image from "../../../assets/images/R-1.jpg";
+import { FaClock } from "react-icons/fa";
+import { MdPriceChange } from "react-icons/md";
+import { Link } from "react-router-dom";
 
-const Restaurants = () => {
+const Restaurants = (props) => {
+  const style = {
+    marginBottom: "3px",
+    marginRight: "5px",
+  };
+  const {
+    restaurantName,
+    restaurantAddress,
+    operatingHours,
+    priceLevel,
+    restaurantImage,
+  } = props.restaurant;
   return (
-    <div className="">
-      <img className="img-fluid" src={image} alt="" />
-      <div className="d-flex justify-content-between mt-4">
-        <h5>Momo Hut - Safe Food</h5>
-        <p>0/5</p>
-      </div>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti
-        voluptas perspiciatis nostrum odit ab quos voluptate alias labore
-        officia similique!
-      </p>
+    <div className="col-lg-3 col-md-4 col-sm-6">
+      <Link
+        className="nav-link link-dark"
+        to={`/displayMenus/${restaurantName}`}
+      >
+        <img className="img-fluid" src={restaurantImage} alt="" />
+        <div className="mt-4 d-flex justify-content-between">
+          <h5>{restaurantName}</h5>
+          <p>
+            <MdPriceChange color="#C60D5C" style={style} size="20px" />
+            {priceLevel}
+          </p>
+        </div>
+        <div className="d-flex justify-content-between">
+          <p>{restaurantAddress}</p>
+          <p>
+            <FaClock color="#C60D5C" style={style} />
+            {operatingHours} Hours
+          </p>
+        </div>
+      </Link>
     </div>
   );
 };

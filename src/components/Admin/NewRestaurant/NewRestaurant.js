@@ -1,134 +1,123 @@
-import React from "react";
-import Sidebar from "../Sidebar/Sidebar";
+import axios from "axios";
+import React, { useState } from "react";
 import Header from "./../../Shared Components/Header/Header";
+import Sidebar from "./../Sidebar/Sidebar";
 
-const NewMenu = () => {
-  // const form = document.getElementById("newRestaurant");
-  // form.addEventListener("submit", newRestaurant);
+const NewRestaurant = () => {
+  const [restaurantName, setRestaurantName] = useState("");
+  const [restaurantAddress, setRestaurantAddress] = useState("");
+  const [operatingHours, setOperatingHours] = useState("");
+  const [priceLevel, setPriceLevel] = useState("");
+  const [restaurantType, setRestaurantType] = useState("");
+  const [restaurantImage, setRestaurantImage] = useState("");
+  console.log(restaurantName);
+  const onChangeFile = (e) => {
+    setRestaurantImage(e.target.files[0]);
+  };
 
-  async function newRestaurant(event) {
+  //   console.log(restaurantImage);
+
+  const newRestaurant = async (event) => {
     event.preventDefault();
-    const restaurantName = document.getElementById("restaurantName").value;
-    const restaurantAddress =
-      document.getElementById("restaurantAddress").value;
-    const operatingHours = document.getElementById("operatingHours").value;
-    const priceLevel = document.getElementById("priceLevel").value;
-    const restaurantType = document.getElementById("restaurantType").value;
 
-    // console.log(
-    //   restaurantName,
-    //   restaurantAddress,
-    //   operatingHours,
-    //   priceLevel,
-    //   restaurantType
-    // );
+    const formData = new FormData();
+    formData.append("restaurantName", restaurantName);
+    formData.append("restaurantAddress", restaurantAddress);
+    formData.append("operatingHours", operatingHours);
+    formData.append("priceLevel", priceLevel);
+    formData.append("restaurantType", restaurantType);
+    formData.append("restaurantImage", restaurantImage);
 
-    const result = await fetch("http://localhost:3030/addRestaurant", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        restaurantName,
-        restaurantAddress,
-        operatingHours,
-        priceLevel,
-        restaurantType,
-      }),
-    }).then((res) => res.json());
-    if (result.status === "Successfull") {
-      alert("New Restaurant Added Successfully");
-      window.location.href = "/";
-    }
-  }
+    axios
+      .post("http://localhost:3030/api/user-profile", formData, {})
+      .then((res) => {
+        console.log(res);
+      });
+  };
 
   return (
-    <>
+    <section>
+      <Header />
       <div className="container-fluid">
-        <Header />
         <div className="row mt-5">
           <div className="col-md-3">
             <Sidebar />
           </div>
           <div className="col-md-6 mx-5">
             <h1 className="text-center mb-5">Add New Restaurant</h1>
-            <form
-              // id="newRestaurant"
-              onSubmit={newRestaurant}
-              // enctype="multipart/form-data"
-            >
+            <form onSubmit={newRestaurant} enctype="multipart/form-data">
               <div className="mb-3">
-                <label for="exampleInputEmail1" className="form-label">
-                  Restaurant Name
-                </label>
+                <label className="form-label">Restaurant Name</label> <br />
                 <input
+                  value={restaurantName}
+                  className="form-control"
                   type="text"
                   name="restaurantName"
-                  id="restaurantName"
-                  className="form-control"
+                  onChange={(e) => setRestaurantName(e.target.value)}
                 />
               </div>
               <div className="mb-3">
-                <label for="exampleInputEmail1" className="form-label">
-                  Restaurant Address
-                </label>
+                <label className="form-label">Restaurant Address</label> <br />
                 <input
+                  value={restaurantAddress}
+                  className="form-control"
                   type="text"
                   name="restaurantAddress"
-                  className="form-control"
-                  id="restaurantAddress"
+                  onChange={(e) => setRestaurantAddress(e.target.value)}
                 />
               </div>
               <div className="mb-3">
-                <label for="exampleInputEmail1" className="form-label">
-                  Operating Hours
-                </label>
+                <label className="form-label">Operating Hours</label> <br />
                 <input
-                  type="number"
-                  name="operatingHours"
+                  value={operatingHours}
                   className="form-control"
-                  id="operatingHours"
+                  type="text"
+                  name="operatingHours"
+                  onChange={(e) => setOperatingHours(e.target.value)}
                 />
               </div>
               <div className="mb-3">
-                <label for="formFile" className="form-label">
-                  Price Level
-                </label>
+                <label className="form-label">Price Level</label> <br />
                 <select
-                  className="form-select"
-                  name="priceLevel"
-                  id="priceLevel"
+                  class="form-select"
                   aria-label="Default select example"
+                  onChange={(e) => setPriceLevel(e.target.value)}
                 >
-                  <option selected>€</option>
-                  <option>€€</option>
-                  <option>€€€</option>
-                  <option>€€€€</option>
+                  <option selected>Select Level</option>
+                  <option value="1">€</option>
+                  <option value="2">€€</option>
+                  <option value="3">€€€</option>
+                  <option value="3">€€€€</option>
                 </select>
               </div>
               <div className="mb-3">
-                <label for="formFile" className="form-label">
-                  Restaurant Type
-                </label>
+                <label className="form-label">Restaurant Type</label> <br />
                 <select
-                  className="form-select"
-                  name="restaurantType"
-                  id="restaurantType"
+                  class="form-select"
+                  onChange={(e) => setRestaurantType(e.target.value)}
                   aria-label="Default select example"
                 >
-                  <option selected>Buffet</option>
-                  <option>Fast Food</option>
-                  <option>Fast Casual</option>
-                  <option>Casual Dining</option>
-                  <option>Fine Dining</option>
+                  <option selected>Select Type</option>
+                  <option value="1">Buffet</option>
+                  <option value="2">Fast Food</option>
+                  <option value="3">Fast Casual</option>
+                  <option value="3">Casual Dining</option>
+                  <option value="3">Fine Dining</option>
                 </select>
               </div>
-              {/* <div className="mb-3">
-                <label for="formFile" className="form-label">
-                  Restaurant Scenario
-                </label>
-                <input className="form-control" type="file" name="image" />
-              </div> */}
+              <div className="mb-3">
+                <label htmlFor="file" className="form-label">
+                  Restaurant Image
+                </label>{" "}
+                <br />
+                <input
+                  className="form-control-file"
+                  type="file"
+                  filename="restaurantImage"
+                  onChange={onChangeFile}
+                />
+              </div>
+
               <button type="submit" className="btn btn-outline-dark">
                 {" "}
                 Store in Database and Display
@@ -137,8 +126,8 @@ const NewMenu = () => {
           </div>
         </div>
       </div>
-    </>
+    </section>
   );
 };
 
-export default NewMenu;
+export default NewRestaurant;

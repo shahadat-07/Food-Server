@@ -3,7 +3,9 @@ import "./App.css";
 import Admin from "./components/Admin/Admin/Admin";
 import NewAdmin from "./components/Admin/NewAdmin/NewAdmin";
 import NewMenu from "./components/Admin/NewMenu/NewMenu";
+import NewMenuFrom from "./components/Admin/NewMenu/NewMenuForm";
 import NewRestaurant from "./components/Admin/NewRestaurant/NewRestaurant";
+import DisplayMenus from "./components/Home/DisplayMenus/DisplayMenus";
 import Home from "./components/Home/Home/Home";
 import Login from "./components/Login/Login";
 import Registration from "./components/Registration/Registration";
@@ -32,6 +34,12 @@ function App() {
         </Route>
         <Route exact path="/newAdmin">
           <NewAdmin />
+        </Route>
+        <Route exact path="/newMenuForm/:restaurantName">
+          <NewMenuFrom />
+        </Route>
+        <Route exact path="/displayMenus/:restaurantName">
+          <DisplayMenus />
         </Route>
       </Switch>
     </Router>
