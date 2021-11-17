@@ -30,7 +30,8 @@ const NewMenuForm = () => {
       .post("http://localhost:3030/api/addMenu", formData, {})
       .then((res) => {
         console.log(res);
-      });
+      })
+      .then((window.location.href = "/"));
   };
 
   return (

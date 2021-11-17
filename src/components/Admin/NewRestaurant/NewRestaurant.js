@@ -10,7 +10,6 @@ const NewRestaurant = () => {
   const [priceLevel, setPriceLevel] = useState("");
   const [restaurantType, setRestaurantType] = useState("");
   const [restaurantImage, setRestaurantImage] = useState("");
-  console.log(restaurantName);
   const onChangeFile = (e) => {
     setRestaurantImage(e.target.files[0]);
   };
@@ -32,7 +31,8 @@ const NewRestaurant = () => {
       .post("http://localhost:3030/api/user-profile", formData, {})
       .then((res) => {
         console.log(res);
-      });
+      })
+      .then((window.location.href = "/"));
   };
 
   return (

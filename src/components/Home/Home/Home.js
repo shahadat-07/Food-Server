@@ -6,7 +6,7 @@ import Restaurants from "../Restaurants/Restaurants";
 
 const Home = () => {
   const [restaurants, setRestaurants] = useState([]);
-  // console.log(restaurants);
+  console.log(restaurants);
 
   useEffect(() => {
     fetch(`http://localhost:3030/api/allRestaurants`)
