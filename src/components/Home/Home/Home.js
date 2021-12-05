@@ -6,26 +6,43 @@ import Restaurants from "../Restaurants/Restaurants";
 
 const Home = () => {
   const [restaurants, setRestaurants] = useState([]);
-  console.log(restaurants);
+  const [filter, setFilter] = useState("");
+
+  const handleFilter = (event) => {
+    setFilter(event.target.value);
+  };
 
   useEffect(() => {
-    fetch(`http://localhost:3030/api/allRestaurants`)
+    fetch(`http://localhost:3030/api/allRestaurants?search=` + filter)
       .then((res) => res.json())
       .then((data) => {
         setRestaurants(data);
       });
-  }, []);
+  }, [filter]);
 
   return (
     <section>
       <Header />
       <div className="container">
         <Promotion />
-        <h3 className="text-secondary mt-5 pt-5">Popular Restaurant</h3>
+        <h3 className="text-secondary my-3 pt-5">Popular Restaurant</h3>
+        <input
+          placeholder="Search for your favourite restaurant here"
+          type="search"
+          className="form-control mb-5"
+          onChange={handleFilter}
+        />
         <div className="row">
-          {restaurants.map((restaurant) => (
-            <Restaurants restaurant={restaurant}></Restaurants>
-          ))}
+          {restaurants.length > 0 ? (
+            restaurants.map((restaurant) => (
+              <Restaurants
+                key={restaurant._id}
+                restaurant={restaurant}
+              ></Restaurants>
+            ))
+          ) : (
+            <h1 className="text-center my-5">No Restaurant Found</h1>
+          )}
         </div>
       </div>
       <Footer />

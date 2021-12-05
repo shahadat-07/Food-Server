@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useParams } from "react-router";
+import Footer from "../../Shared Components/Footer/Footer";
 import Header from "./../../Shared Components/Header/Header";
 
 const NewMenuForm = () => {
@@ -14,8 +15,6 @@ const NewMenuForm = () => {
     setMenuImage(e.target.files[0]);
   };
 
-  //   console.log(restaurantImage);
-
   const newMenu = async (event) => {
     event.preventDefault();
 
@@ -26,8 +25,10 @@ const NewMenuForm = () => {
     formData.append("menuImage", menuImage);
     formData.append("restaurantName", restaurantName);
 
-    axios
-      .post("http://localhost:3030/api/addMenu", formData, {})
+    console.log(formData);
+
+    await axios
+      .post("http://localhost:3030/api/addMenu", formData)
       .then((res) => {
         console.log(res);
       })
@@ -72,7 +73,7 @@ const NewMenuForm = () => {
                 <input
                   value={menuPrice}
                   className="form-control"
-                  type="text"
+                  type="number"
                   name="menuPrice"
                   onChange={(e) => setMenuPrice(e.target.value)}
                 />
@@ -98,6 +99,7 @@ const NewMenuForm = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </section>
   );
 };

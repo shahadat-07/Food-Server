@@ -21,7 +21,11 @@ const Restaurants = (props) => {
         className="nav-link link-dark"
         to={`/displayMenus/${restaurantName}`}
       >
-        <img className="img-fluid" src={restaurantImage} alt="" />
+        <img
+          className="img-fluid"
+          srcSet={restaurantImage}
+          alt="Restaurant Scenary"
+        />
         <div className="mt-4 d-flex justify-content-between">
           <h5>{restaurantName}</h5>
           <p>

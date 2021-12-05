@@ -1,82 +1,95 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import LoginImage from "../../assets/images/login.webp";
+import React, { useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Header from "../Shared Components/Header/Header";
 import Footer from "./../Shared Components/Footer/Footer";
-import classes from "./Login.module.css";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const login = async (event) => {
+    event.preventDefault();
+    let from = location.state?.from?.pathname || "/";
+
+    const result = await fetch("http://localhost:3030/api/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+    }).then((res) => res.json());
+    navigate(from, { replace: true });
+    alert(result.message);
+    const user = result.user;
+    if (user) {
+      if (user.role === "admin") {
+        localStorage.setItem("currentLoggedIn", JSON.stringify(user));
+        window.location.href = "/admin";
+      } else if (user.role === "user") {
+        localStorage.setItem("currentLoggedIn", JSON.stringify(user));
+        // window.location.href = "/";
+        // navigate(from, { replace: true });
+      }
+    } else {
+      window.location.href = "/login";
+    }
+  };
+
   return (
     <section>
       <Header />
       <div className="container">
-        <div className="text-center">
-          <h2 className="font-weight-normal mt-5">Welcome!</h2>
-          <p className="text-secondary mb-5">Sign up or log in to continue</p>
-        </div>
-        {/* <img
-          className="mb-4 w-25 img-fluid mx-auto d-block"
-          src={Logo}
-          alt=""
-        /> */}
         <div className="row">
-          <div className="col-md-6">
-            <img
-              src={LoginImage}
-              className="img-fluid rounded p-4"
-              alt=""
-              srcset=""
-            />
+          <div className="text-center my-4">
+            <h2>Welcome!</h2>
+            <p>Login to continue</p>
           </div>
+          <div className="col-md-3"></div>
           <div className="col-md-6">
-            <form id="login" className="form-signin">
-              <label for="inputEmail" className="sr-only">
-                <span className="text-secondary">Email</span>
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                className="form-control"
-                placeholder="Enter Your Email"
-                required
-              />{" "}
-              <br />
-              <label for="inputPassword" className="sr-only">
-                <span className="text-secondary">Password</span>
-              </label>
-              <input
-                type="password"
-                name="password"
-                id="password"
-                className="form-control"
-                placeholder="Password"
-                required
-              />
-              {/* <p style="display: none;" id="warning" className="text-danger text-left my-3">Sorry, you entered the wrong username and/or password</p> */}
-              <div className="checkbox my-3">
-                <label>
-                  <input type="checkbox" value="remember-me" /> Remember me
-                </label>
+            <form onSubmit={login}>
+              <div className="">
+                <input
+                  type="email"
+                  className="form-control"
+                  name="email"
+                  placeholder="Email Address"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+                <br />
               </div>
-              <button className="btn btn-primary" type="submit">
-                Log in
+              <div className="">
+                <input
+                  type="password"
+                  className="form-control"
+                  name="password"
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+                <br />
+              </div>
+              <button className="btn btn-block btn-danger" type="submit">
+                Login
               </button>
               <br />
-              <div className="d-flex mt-3">
-                <span>Haven't an account yet?</span>
-                <Link to="/signup" className={classes.register}>
-                  Create an account here !
-                </Link>
-              </div>
-              <div className="d-flex mt-3">
-                <span>A Manager?</span>
-                <Link to="/admin" className={classes.register}>
-                  Go On
+              <br />
+              <div className="">
+                <p>Haven't and Account Yet!</p>{" "}
+                <Link className="" to="/signup">
+                  <b>Click Here</b>
                 </Link>
               </div>
             </form>
           </div>
+          <div className="col-md-3"></div>
         </div>
       </div>
       <Footer />

@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import Footer from "../../Shared Components/Footer/Footer";
 import Header from "./../../Shared Components/Header/Header";
 import Sidebar from "./../Sidebar/Sidebar";
 
@@ -126,6 +127,7 @@ const NewRestaurant = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </section>
   );
 };

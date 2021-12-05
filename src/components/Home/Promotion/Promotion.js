@@ -2,12 +2,6 @@ import React from "react";
 import "./Promotion.css";
 
 const Promotion = () => {
-  // var myCarousel = document.querySelector("#myCarousel");
-  // var carousel = new bootstrap.Carousel(myCarousel, {
-  //   interval: 2000,
-  //   wrap: false,
-  // });
-
   return (
     <div
       id="carouselExampleDark"
@@ -37,27 +31,13 @@ const Promotion = () => {
         ></button>
       </div>
       <div className="carousel-inner">
-        <div id="c1" className="carousel-item active" data-bs-interval="5000">
-          {/* <img src={promotion1} className={classes.carousel} alt="..." /> */}
-          {/* <div className="carousel-caption d-none d-md-block">
-            <h5>First slide label</h5>
-            <p>Some representative placeholder content for the first slide.</p>
-          </div> */}
-        </div>
-        <div id="c2" className="carousel-item" data-bs-interval="5000">
-          {/* <img src={promotion2} className={classes.carousel} alt="..." /> */}
-          {/* <div className="carousel-caption d-none d-md-block">
-            <h5>Second slide label</h5>
-            <p>Some representative placeholder content for the second slide.</p>
-          </div> */}
-        </div>
-        <div id="c3" className="carousel-item" data-bs-interval="5000">
-          {/* <img src={promotion3} className={classes.carousel} alt="..." /> */}
-          {/* <div className="carousel-caption d-none d-md-block">
-            <h5>Third slide label</h5>
-            <p>Some representative placeholder content for the third slide.</p>
-          </div> */}
-        </div>
+        <div
+          id="c1"
+          className="carousel-item active"
+          data-bs-interval="5000"
+        ></div>
+        <div id="c2" className="carousel-item" data-bs-interval="5000"></div>
+        <div id="c3" className="carousel-item" data-bs-interval="5000"></div>
       </div>
       <button
         className="carousel-control-prev"
